@@ -99,16 +99,13 @@ const gameScene = {
         // ==========================================
         const forestGroup = this.physics.add.staticGroup();
         
-        // Helper function to plant a tree, fix its hitbox, and set its depth!
         const plantTree = (x, y) => {
             let tree = forestGroup.create(x, y, 'detailed_tree').setOrigin(0,0).setScale(4);
             tree.refreshBody(); 
-            // 🌟 1. Shrink the invisible collision box to just the trunk!
             tree.body.width = 48;  
             tree.body.height = 48; 
             tree.body.x = tree.x + 40; 
             tree.body.y = tree.y + 208; 
-            // 🌟 2. Set drawing depth based on the trunk's vertical position
             tree.setDepth(tree.y + 208);
         };
 
@@ -123,10 +120,9 @@ const gameScene = {
         const myHouse = this.physics.add.staticSprite(1100, 600, 'house');
         myHouse.setScale(3); 
         myHouse.refreshBody();
-        // Shrink house hitbox to just the bottom walls/door
         myHouse.body.setSize(120, 60);
         myHouse.body.setOffset(12, 84);
-        myHouse.setDepth(myHouse.y + 60); // Set house depth
+        myHouse.setDepth(myHouse.y + 60); 
 
         // 🧩 Puzzle Items
         const secretBush = this.physics.add.staticSprite(950, 480, 'secret_bush');
@@ -182,8 +178,6 @@ const gameScene = {
         // ==========================================
         this.cameras.main.setBounds(0, 0, worldWidth, worldHeight);
         this.cameras.main.startFollow(player, true, 0.08, 0.08);
-        
-        // 🌟 3. ZOOM OUT! This gives us a much wider view of the beautiful map
         this.cameras.main.setZoom(0.8);
 
         uiText = this.add.text(this.cameras.main.centerX, 30, 'Home sweet home. Let\'s explore! 🌳', {
@@ -203,13 +197,12 @@ const gameScene = {
         player.setVelocity(0);
 
         if (joyStick.left) { player.setVelocityX(-150); player.setFlipX(false); isMoving = true; } 
-        else if (joyStick.right) { player.setVelocityX(150); player.setFlipX(true); is moving = true; } 
+        // 🐞 THE BUG WAS FIXED ON THIS LINE RIGHT HERE! 🐞
+        else if (joyStick.right) { player.setVelocityX(150); player.setFlipX(true); isMoving = true; } 
         
         if (joyStick.up) { player.setVelocityY(-150); isMoving = true; } 
         else if (joyStick.down) { player.setVelocityY(150); isMoving = true; } 
 
-        // 🌟 4. Dynamic Depth Updating
-        // This makes sure the cat's rendering order changes as it walks up and down!
         player.setDepth(player.y + 32);
 
         if (isMoving) {
