@@ -1,20 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Relaxing Cat Adventure</title>
-    <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js"></script>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #000; 
-            overflow: hidden; /* Stops scrollbars from appearing */
-        }
-    </style>
+<meta charset="UTF-8">
+<title>2D RPG Game</title>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <script src="game.js"></script>
+
+<canvas id="game"></canvas>
+
+<div id="ui">
+  ❤️ HP: <span id="hp"></span>
+  💰 Gold: <span id="gold"></span>
+  ⭐ Level: <span id="level"></span>
+</div>
+
+<div id="shop">
+  <h3>Shop (Press E to close)</h3>
+  <button onclick="buySword()">Sword (+5 ATK) - 50 Gold</button>
+  <button onclick="buyPotion()">Potion (+30 HP) - 20 Gold</button>
+</div>
+
+<script src="game.js"></script>
 </body>
 </html>
